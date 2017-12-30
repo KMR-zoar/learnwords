@@ -21,7 +21,7 @@ var sendWord = require('./modules/message');
 var reactionprocess = require('./modules/reactionprocess');
 
 controller.hears('q',['ambient'],(bot, message) => {
-      sendWord(bot, message);
+   sendWord(bot, message);
 });
 
 controller.on('reaction_added',(bot, event) => {
