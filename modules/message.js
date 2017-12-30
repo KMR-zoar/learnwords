@@ -17,7 +17,7 @@ function sendMessage(bot, message, body) {
 
 function choiceword(bot, message) {
    db.serialize(() => {
-      db.all('SELECT word, meaning, count FROM words count < 5',
+      db.all('SELECT word, meaning, count FROM words WHERE count < 5',
          function (err, rows) {
             if (err) throw console.log(err);
             var index = Math.floor(Math.random() * rows.length);
