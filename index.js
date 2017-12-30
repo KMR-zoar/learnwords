@@ -17,19 +17,10 @@ var bot = controller.spawn({
    }
 });
 
+var text = require('./modules/message');
+
 controller.hears('q',['ambient'],(bot, message) => {
-   bot.reply(message, 'Hello World!', (err, res) => {
-      bot.api.reactions.add({
-         name: 'white_check_mark',
-         channel: message.channel,
-         timestamp: res.message.ts
-      });
-      bot.api.reactions.add({
-         name: 'negative_squared_cross_mark',
-         channel: message.channel,
-         timestamp: res.message.ts
-      });
-   });
+      text(bot, message);
 });
 
 controller.on('reaction_added',(bot, event) => {
