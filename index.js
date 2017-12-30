@@ -31,3 +31,10 @@ controller.hears('q',['ambient'],(bot, message) => {
       });
    });
 });
+
+controller.on('reaction_added',(bot, event) => {
+   if ((event.user == 'U0LMFP6Q0') &&
+       (event.item_user == 'U8MB8MZ9U')) {
+      console.log(event);
+   };
+});
