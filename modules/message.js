@@ -15,8 +15,8 @@ function sendMessage(bot, message, body) {
    });
 };
 
-function selectAll(bot, message) {
-   db.serialize(function () {
+function choiceword(bot, message) {
+   db.serialize(() => {
       db.all('select word, meaning, count from words',
          function (err, rows) {
             if (err) throw console.log(err);
@@ -27,4 +27,4 @@ function selectAll(bot, message) {
    });
  };
 
-module.exports = selectAll;
+module.exports = choiceword;
