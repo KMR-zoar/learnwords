@@ -17,7 +17,7 @@ function sendMessage(bot, message, body) {
 
 function choiceword(bot, message) {
    db.serialize(() => {
-      db.all('select word, meaning, count from words',
+      db.all('SELECT word, meaning, count FROM words',
          function (err, rows) {
             if (err) throw console.log(err);
             var index = Math.floor(Math.random() * rows.length);

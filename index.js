@@ -27,17 +27,6 @@ controller.hears('q',['ambient'],(bot, message) => {
 controller.on('reaction_added',(bot, event) => {
    if ((event.user == 'U0LMFP6Q0') &&
        (event.item_user == 'U8MB8MZ9U')) {
-
-      bot.api.channels.replies({
-         channel: event.item.channel,
-         thread_ts: event.item.ts
-      },
-      (err, res) => {
-         bot.api.chat.update({
-            channel: event.item.channel,
-            ts: event.item.ts,
-            text: 'poison'
-         });
-      });
+      reactionprocess(bot, event);
    };
 });
