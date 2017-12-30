@@ -17,6 +17,17 @@ var bot = controller.spawn({
    }
 });
 
-controller.hears('test',['ambient'],(bot, message) => {
-   bot.reply(message, 'Hello World!')
+controller.hears('q',['ambient'],(bot, message) => {
+   bot.reply(message, 'Hello World!', (err, res) => {
+      bot.api.reactions.add({
+         name: 'white_check_mark',
+         channel: message.channel,
+         timestamp: res.message.ts
+      });
+      bot.api.reactions.add({
+         name: 'negative_squared_cross_mark',
+         channel: message.channel,
+         timestamp: res.message.ts
+      });
+   });
 });
