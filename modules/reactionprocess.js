@@ -1,5 +1,20 @@
 var db = require('./db');
 
+function increment(word) {
+   var sql = 'SELECT count FROM words WHERE word =\'' + word + '\'';
+   db.all(sql, (err, res) =>{
+      var count = res[0].count + 1;
+      var sql = 'UPDATE words SET count = ' + count + ' WHERE word =\'' + word + '\'';
+      db.run(sql);
+   });
+};
+
+function reset(word) {
+   var count = 0;
+   var sql = 'UPDATE words SET count = ' + count + ' WHERE word =\'' + word + '\'';
+   db.run(sql);
+}
+
 function searchmeaning(bot,event) {
    bot.api.channels.replies({
       channel: event.item.channel,
@@ -7,21 +22,22 @@ function searchmeaning(bot,event) {
    },
    (err, res) => {
       var word = res.messages[0].text;
-      var sql = 'SELECT count FROM words WHERE word =' + '\'word\'';
-      db.all(sql, (dberr, dbres) =>{
-         var count = dbres[0].count + 1;
-         console.log(count);
-         var sql = 'UPDATE words SET count = ' + count + ' WHERE word =' + '\'word\'';
-         db.run(sql,);
-         console.log(sql);
+      var reaction = event.reaction;
+      if (reaction = 'negative_squared_cross_mark') {
+         reset(word);
+      } else if (reaction = 'white_check_mark') {
+         increment(word);
+      }
+      var sql = 'SELECT meaning FROM words WHERE word =\'' + word + '\'';
+      db.all(sql,(dberr, dbres) =>{
+         var meaning = dbres[0].meaning;
+         var newtext = word + "\n" + meaning;
+         bot.api.chat.update({
+            channel: event.item.channel,
+            ts: event.item.ts,
+            text: newtext
+         });
       });
-      /*
-      bot.api.chat.update({
-         channel: event.item.channel,
-         ts: event.item.ts,
-         text: 'poison'
-      });
-      */
    });
 };
 
