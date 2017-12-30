@@ -33,13 +33,15 @@ function searchmeaning(bot,event) {
          increment(word);
       }
       var sql = 'SELECT meaning FROM words WHERE word =\'' + word + '\'';
-      db.all(sql,(dberr, dbres) =>{
-         var meaning = dbres[0].meaning;
-         var newtext = word + "\n" + meaning;
-         bot.api.chat.update({
-            channel: event.item.channel,
-            ts: event.item.ts,
-            text: newtext
+      db.serialize(() => {
+         db.all(sql,(dberr, dbres) =>{
+            var meaning = dbres[0].meaning;
+            var newtext = word + "\n" + meaning;
+            bot.api.chat.update({
+               channel: event.item.channel,
+               ts: event.item.ts,
+               text: newtext
+            });
          });
       });
    });
