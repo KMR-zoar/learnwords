@@ -12,7 +12,11 @@ var bot = controller.spawn({
    token: process.env.token
 }).startRTM(function(err, bot, payload) {
    if (err) {
-       console.log('Error: Cannot to Slack');
-       process.exit(1);
+      console.log('Error: Cannot to Slack');
+      process.exit(1);
    }
+});
+
+controller.hears('test',['ambient'],(bot, message) => {
+   bot.reply(message, 'Hello World!')
 });
