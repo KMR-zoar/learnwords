@@ -27,9 +27,9 @@ function searchmeaning(bot,event) {
    (err, res) => {
       var word = res.messages[0].text;
       var reaction = event.reaction;
-      if (reaction = 'negative_squared_cross_mark') {
+      if (reaction == 'negative_squared_cross_mark') {
          reset(word);
-      } else if (reaction = 'white_check_mark') {
+      } else if (reaction == 'white_check_mark') {
          increment(word);
       }
       var sql = 'SELECT meaning FROM words WHERE word =\'' + word + '\'';
