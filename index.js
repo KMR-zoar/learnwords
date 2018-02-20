@@ -3,12 +3,12 @@ if (!process.env.token) {
    process.exit(1);
 }
 
-var Botkit = require('botkit');
-var controller = Botkit.slackbot({
+const Botkit = require('botkit');
+const controller = Botkit.slackbot({
    debug: false
 });
 
-var bot = controller.spawn({
+const bot = controller.spawn({
    token: process.env.token
 }).startRTM(function(err, bot, payload) {
    if (err) {
@@ -17,8 +17,8 @@ var bot = controller.spawn({
    }
 });
 
-var sendWord = require('./modules/message');
-var reactionprocess = require('./modules/reactionprocess');
+const sendWord = require('./modules/message');
+const reactionprocess = require('./modules/reactionprocess');
 
 controller.hears('q',['ambient'],(bot, message) => {
    sendWord(bot, message);
