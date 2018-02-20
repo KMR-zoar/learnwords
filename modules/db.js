@@ -1,4 +1,4 @@
-var sqlite3 = require('sqlite3');
-var db = new sqlite3.Database('./words.sqlite');
+const sqlite3 = require('sqlite3');
+const db = new sqlite3.Database('./words.sqlite');
 
 module.exports = db;
