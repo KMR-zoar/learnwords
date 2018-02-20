@@ -1,4 +1,4 @@
-var db = require('./db');
+const db = require('./db');
 
 function sendMessage(bot, message, body) {
    bot.reply(message, body.word, (err, res) => {
@@ -20,8 +20,8 @@ function choiceword(bot, message) {
       db.all('SELECT word, meaning, count FROM words WHERE count < 5',
          function (err, rows) {
             if (err) throw console.log(err);
-            var index = Math.floor(Math.random() * rows.length);
-            var text = rows[index - 1];
+            let index = Math.floor(Math.random() * rows.length);
+            let text = rows[index - 1];
             sendMessage(bot, message, text);
      });
    });
