@@ -4,9 +4,12 @@ function increment(word) {
    var sql = 'SELECT count FROM words WHERE word =\'' + word + '\'';
    db.serialize(() => {
       db.all(sql, (err, res) =>{
-         var count = res[0].count + 1;
-         var sql = 'UPDATE words SET count = ' + count + ' WHERE word =\'' + word + '\'';
-         db.run(sql);
+         if (err) throw err;
+         if (res.length) {
+            var count = res[0].count + 1;
+            var sql = 'UPDATE words SET count = ' + count + ' WHERE word =\'' + word + '\'';
+            db.run(sql);
+         }
       });
    });
 };
