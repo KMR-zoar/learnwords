@@ -20,8 +20,8 @@ function choiceword(bot, message) {
       db.all('SELECT word, meaning, count FROM words WHERE count < 5',
          function (err, rows) {
             if (err) throw console.log(err);
-            let index = Math.floor(Math.random() * rows.length);
-            let text = rows[index - 1];
+            const index = Math.floor(Math.random() * rows.length);
+            const text = rows[index - 1];
             sendMessage(bot, message, text);
      });
    });
