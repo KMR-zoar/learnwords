@@ -14,7 +14,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/zoar/learnwords#readme",
   "dependencies": {
-    "botkit": "^0.6.7",
-    "sqlite3": "^4.0.2"
+    "botkit": "^4.0.2",
+    "sqlite3": "^4.0.9"
   }
 }
